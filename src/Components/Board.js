@@ -1,4 +1,3 @@
-// @flow
 import React, { useState } from "react";
 import styled from "@xstyled/styled-components";
 import PropTypes from "prop-types";
@@ -11,15 +10,9 @@ const Container = styled.div`
   display: inline-flex;
 `;
 
-const Board = ({
-  isCombineEnabled,
-  initial,
-  containerHeight,
+const Board = ({ isCombineEnabled, initial, containerHeight }) => {
+  const [columns, setColumns] = useState({ ...initial });
 
-}) => {
-    
-  const [columns, setColumns] = useState(initial);
-  console.log("initial",columns,initial)
   const [ordered, setOrdered] = useState(Object.keys(initial));
 
   const onDragEnd = (result) => {
@@ -75,6 +68,10 @@ const Board = ({
     setColumns(data.quoteMap);
   };
 
+  React.useEffect(() => {
+    setColumns(initial);
+  }, [initial]);
+
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -93,7 +90,6 @@ const Board = ({
                   index={index}
                   title={key}
                   users={columns[key]}
-              
                 />
               ))}
               {provided.placeholder}

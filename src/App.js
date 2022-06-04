@@ -10,12 +10,10 @@ import Board from "./Components/Board";
 import { flex } from "@xstyled/styled-components";
 
 function App() {
-  
   const [Users, setUsers] = useState({});
   const [filteredResults, setFilteredResults] = useState(Users);
   const [searchInput, setSearchInput] = useState("");
 
- 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const url = "https://randomuser.me/api/?results=30";
@@ -24,8 +22,6 @@ function App() {
         const response = await fetch(url);
         const json = await response.json();
         const randomuser = json.results;
-        console.log(json.results);
-        setIsLoading(false);
         setUsers({
           Open: randomuser.slice(0, 7),
           Contacted: randomuser.slice(7, 10),
@@ -33,56 +29,55 @@ function App() {
           Culture: randomuser.slice(17, 24),
           Written: randomuser.slice(26, 28),
         });
+        setFilteredResults({
+          Open: randomuser.slice(0, 7),
+          Contacted: randomuser.slice(7, 10),
+          Techincal: randomuser.slice(10, 15),
+          Culture: randomuser.slice(17, 24),
+          Written: randomuser.slice(26, 28),
+        });
+        setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
-        console.log("error", error);
+        console.error("error", error);
       }
     };
 
     fetchData();
   }, []);
 
-  console.log("user", filteredResults);
-
-  // const searchItems = (searchValue) => {
-  //   setSearchInput(searchValue);
-  //   console.log("searchValue", searchValue);
-
-  //   if (searchValue !== "") {
-  //     const filteredData = filteredResults.filter((item) => {
-  //       console.log("item", item);
-  //       return item.name.first
-  //         .toLowerCase()
-  //         .includes(searchValue.toLowerCase());
-  //     });
-  //     setFilteredResults(filteredData);
-  //     console.log("filter", filteredData);
-  //   } else {
-  //     setFilteredResults(Users);
-  //   }
-  // };
   const searchItems = (searchValue) => {
     setSearchInput(searchValue);
-    let result={}
-    Object.keys(Users).forEach(item => {
-      const arr = Users[item].filter(data => {
-        return data.name.toLowerCase().includes(searchValue.toLowerCase())
+    let result = {};
+    if (searchValue !== "") {
+      const groupList = Object.keys(Users);
+      groupList?.forEach((item) => {
+        console.log("item", item);
+        const arr = Users[item].filter((data) => {
+          return data.name.first
+            .toLowerCase()
+            .includes(searchValue.toLowerCase());
+        });
+        result[item] = arr;
       });
-      console.log(arr)
-      result[item] = arr;
-    })
-   setFilteredResults(result);
-  }
-  console.log("filteredResults", filteredResults);
-  useEffect(() => {
-    if (Object.keys(Users).length > 0) {
+      setFilteredResults(result);
+    } else {
       setFilteredResults(Users);
     }
-  }, [Users]);
+   
+  };
 
   return (
     <div className="main-container">
-      {isLoading &&   <ReactLoading type="spin" color="#000" height={'10%'} width={'10%'} delay={300} />}
+      {isLoading && (
+        <ReactLoading
+          type="spin"
+          color="#000"
+          height={"10%"}
+          width={"10%"}
+          delay={300}
+        />
+      )}
       {!isLoading && (
         <>
           <div className="left-nav">
@@ -95,7 +90,7 @@ function App() {
                 searchInput={searchInput}
               />
             </div>
-            <div className="panel-nav" >
+            <div className="panel-nav">
               <PanelNav />
             </div>
             {/* <div className='dnd-content'>
@@ -106,7 +101,8 @@ function App() {
         </div> */}
             <div className="dnd-content">
               {/* {loading ? <div>Loading...</div> : <DndContent users={Users} />} */}
-              {isLoading ?  <ReactLoading type="bars" color="#000" /> : <Board initial={filteredResults} />}
+              {isLoading && <ReactLoading type="bars" color="#000" />}
+              {!isLoading && <Board initial={filteredResults} />}
               <Footer />
             </div>
           </div>

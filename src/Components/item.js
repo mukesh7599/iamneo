@@ -24,7 +24,7 @@ const DragItem = styled.div`
 `;
 function userItem(props) {
   const { user, provided } = props;
-
+console.log("pro",user)
   return (
     <DragItem
       ref={provided.innerRef}
@@ -32,7 +32,7 @@ function userItem(props) {
       {...provided.dragHandleProps}
     >
       <CardHeader>{user?.name?.first + " " + user?.name?.last}</CardHeader>
-      <span>{user?.mail}</span>
+      <span>{user?.email}</span>
       <CardFooter>
         <span>{user?.cell}</span>
       </CardFooter>

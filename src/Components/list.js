@@ -50,7 +50,7 @@ const Container = styled.div``;
 
 const InnerQuoteList = React.memo(function InnerQuoteList(props) 
 {
-    console.log("user1",props);
+    
   return props.users.map((user, index) => (
       
     <Draggable key={user.cell} draggableId={user.cell} index={index}>
