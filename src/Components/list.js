@@ -70,7 +70,7 @@ const InnerQuoteList = React.memo(function InnerQuoteList(props)
 function InnerList(props) {
   const { users, dropProvided } = props;
   const title = props.title ? <div>{props.title}</div> : null;
-console.log("user2",users)
+
   return (
     <Container>
       {title}

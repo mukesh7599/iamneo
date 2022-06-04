@@ -29,7 +29,7 @@ const Column = (props) => {
   const title = props.title;
   const users = props.users;
   const index = props.index;
-  console.log("user3",users)
+  
   return (
     <Draggable draggableId={title} index={index}>
       {(provided, snapshot) => (

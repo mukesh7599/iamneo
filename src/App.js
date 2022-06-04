@@ -39,7 +39,7 @@ function App() {
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
-        console.error("error", error);
+        
       }
     };
 
@@ -52,7 +52,7 @@ function App() {
     if (searchValue !== "") {
       const groupList = Object.keys(Users);
       groupList?.forEach((item) => {
-        console.log("item", item);
+        
         const arr = Users[item].filter((data) => {
           return data.name.first
             .toLowerCase()

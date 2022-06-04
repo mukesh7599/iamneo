@@ -24,7 +24,7 @@ const DragItem = styled.div`
 `;
 function userItem(props) {
   const { user, provided } = props;
-console.log("pro",user)
+
   return (
     <DragItem
       ref={provided.innerRef}
