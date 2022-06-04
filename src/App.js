@@ -5,9 +5,7 @@ import PanelNav from "./Components/panelnav";
 import Footer from "./Components/footer";
 import "./App.css";
 import ReactLoading from "react-loading";
-import { FlashAutoOutlined } from "@mui/icons-material";
 import Board from "./Components/Board";
-import { flex } from "@xstyled/styled-components";
 
 function App() {
   const [Users, setUsers] = useState({});
@@ -93,14 +91,7 @@ function App() {
             <div className="panel-nav">
               <PanelNav />
             </div>
-            {/* <div className='dnd-content'>
-          {filteredResults.map((data) =>(
-          <DndContent data={data} />
-          ))}
-     
-        </div> */}
             <div className="dnd-content">
-              {/* {loading ? <div>Loading...</div> : <DndContent users={Users} />} */}
               {isLoading && <ReactLoading type="bars" color="#000" />}
               {!isLoading && <Board initial={filteredResults} />}
               <Footer />
