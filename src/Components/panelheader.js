@@ -8,7 +8,7 @@ export default function PanelHeader({ searchInput, searchItems }) {
     <div className="header-container">
       <div className="title">
         <BsPersonCircle />
-        <p>iamneo.ai Talent Center</p>
+        <p>Talent Center</p>
       </div>
       <div className="float-right">
         <div className="search-bar">
