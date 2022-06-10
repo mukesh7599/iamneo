@@ -64,6 +64,7 @@ function App() {
     }
    
   };
+  document.title = `Recruiter Panel`;
 
   return (
     <div className="main-container">
